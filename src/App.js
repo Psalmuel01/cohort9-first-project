@@ -1,5 +1,5 @@
-import TodoInput from "./TodoInput";
-import TodoLists from "./TodoLists";
+import TodoInput from "./ToDoInput";
+import TodoLists from "./ToDoLists";
 import "./App.css";
 
 const App = () => (
