@@ -6,6 +6,7 @@ export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [showCompleted, setShowCompleted] = useState(false);
@@ -43,10 +44,14 @@ export const TodoProvider = ({ children }) => {
 
   const handleEdit = (e) => {
     if (e.target.value === "") {
-      return;
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
     }
     const newTodos = todos.map((todo) =>
-      todo.id === editId ? { ...todo, title: e.target.value, completed: false } : todo
+      todo.id === editId
+        ? { ...todo, title: e.target.value, completed: false }
+        : todo
     );
     setTodos(newTodos);
   };
@@ -94,6 +99,7 @@ export const TodoProvider = ({ children }) => {
         editId,
         setEditId,
         isEditing,
+        isEmpty,
         setIsEditing,
         handleAddTodo,
         handleDelete,

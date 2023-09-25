@@ -8,6 +8,7 @@ const TodoItem = ({ todo }) => {
     editId,
     setEditId,
     isEditing,
+    isEmpty,
     setIsEditing,
     handleDelete,
   } = useContext(TodoContext);
@@ -24,7 +25,7 @@ const TodoItem = ({ todo }) => {
           onChange={() => handleCheck(id)}
         />
         {editId === id ? (
-          <input type="text" value={title} onChange={handleEdit} />
+          <input className="edit-input" type="text" value={title} onChange={handleEdit} />
         ) : (
           <span className={`todo-title ${completed && "checked"}`}>
             {title}
@@ -39,6 +40,7 @@ const TodoItem = ({ todo }) => {
               setEditId(null);
               setIsEditing(false);
             }}
+            disabled={isEmpty}
           >
             ✅
           </button>
