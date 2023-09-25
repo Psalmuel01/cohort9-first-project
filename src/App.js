@@ -5,7 +5,7 @@ import "./App.css";
 const App = () => (
   <div className="App">
     <TodoInput />
-    <div className="todo-wrapper">
+    <div>
       <TodoLists />
     </div>
   </div>
