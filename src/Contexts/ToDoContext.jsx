@@ -5,6 +5,7 @@ export const TodoContext = createContext(null);
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [showCompleted, setShowCompleted] = useState(false);
@@ -18,7 +19,7 @@ export const TodoProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         if (!canceled) {
-          setTodos(data.slice(0, 10));
+          setTodos(data.slice(5, 10));
         }
       })
       .catch((err) => {
@@ -41,8 +42,11 @@ export const TodoProvider = ({ children }) => {
   };
 
   const handleEdit = (e) => {
+    if (e.target.value === "") {
+      return;
+    }
     const newTodos = todos.map((todo) =>
-      todo.id === editId ? { ...todo, title: e.target.value } : todo
+      todo.id === editId ? { ...todo, title: e.target.value, completed: false } : todo
     );
     setTodos(newTodos);
   };
@@ -89,6 +93,8 @@ export const TodoProvider = ({ children }) => {
         setInputValue,
         editId,
         setEditId,
+        isEditing,
+        setIsEditing,
         handleAddTodo,
         handleDelete,
         handleCheck,

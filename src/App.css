@@ -11,7 +11,13 @@
   margin: 0.8rem 0;
   display: flex;
   align-items: center;
-  gap: 2%;
+  justify-content: space-between;
+}
+
+.todo div {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 ul {
@@ -26,6 +32,12 @@ ul {
 .todo-input input {
   padding: 12px;
   width: 30rem;
+  border: 1px solid #a5a4a4;
+}
+
+.input-submit:hover {
+  background: rgb(192, 152, 105);
+  cursor: pointer;
 }
 
 .todo-title {
@@ -41,6 +53,11 @@ ul {
 button {
   padding: 12px;
   margin: 4px;
+  border: 1px solid #a5a4a4;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 .pages {
@@ -60,4 +77,27 @@ button {
 
 .page:hover {
   background-color: brown;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+@media (max-width: 960px) {
+  .App {
+    width: 90%;
+  }
+
+  .todo-input {
+    width: unset;
+    text-align: center;
+  }
+
+  .todo-input input {
+    width: 80%;
+  }
 }

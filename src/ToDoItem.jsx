@@ -2,36 +2,62 @@ import React, { useContext } from "react";
 import { TodoContext } from "./Contexts/ToDoContext";
 
 const TodoItem = ({ todo }) => {
-  const { handleEdit, handleCheck, editId, setEditId, handleDelete } =
-    useContext(TodoContext);
+  const {
+    handleEdit,
+    handleCheck,
+    editId,
+    setEditId,
+    isEditing,
+    setIsEditing,
+    handleDelete,
+  } = useContext(TodoContext);
   const { id, title, completed } = todo;
 
   return (
     <li className="todo">
-      <input
-        type="checkbox"
-        checked={completed}
-        onChange={() => handleCheck(id)}
-      />
-      {editId === id ? (
-        <input type="text" value={title} onChange={handleEdit} />
-      ) : (
-        <span className={`todo-title ${completed && "checked"}`}>{title}</span>
-      )}
-      {editId === id ? (
-        <button onClick={() => setEditId(null)}>✅</button>
-      ) : (
-        <button
-          className="del-button"
-          onClick={() => setEditId(id)}
-          disabled={completed}
-        >
-          ✏️
+      <div>
+        <input
+          type="checkbox"
+          className="cursor"
+          disabled={isEditing}
+          checked={completed}
+          onChange={() => handleCheck(id)}
+        />
+        {editId === id ? (
+          <input type="text" value={title} onChange={handleEdit} />
+        ) : (
+          <span className={`todo-title ${completed && "checked"}`}>
+            {title}
+          </span>
+        )}
+      </div>
+
+      <div>
+        {editId === id ? (
+          <button
+            onClick={() => {
+              setEditId(null);
+              setIsEditing(false);
+            }}
+          >
+            ✅
+          </button>
+        ) : (
+          <button
+            className="cursor"
+            onClick={() => {
+              setEditId(id);
+              setIsEditing(true);
+            }}
+            // disabled={completed}
+          >
+            ✏️
+          </button>
+        )}
+        <button className="cursor" onClick={() => handleDelete(id)}>
+          🗑️
         </button>
-      )}
-      <button className="del-button" onClick={() => handleDelete(id)}>
-        🗑️
-      </button>
+      </div>
     </li>
   );
 };
