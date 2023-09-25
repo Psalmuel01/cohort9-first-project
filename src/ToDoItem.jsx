@@ -5,6 +5,7 @@ const TodoItem = ({ todo }) => {
   const { handleEdit, handleCheck, editId, setEditId, handleDelete } =
     useContext(TodoContext);
   const { id, title, completed } = todo;
+
   return (
     <li className="todo">
       <input
